@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        
         binding.btnOpenCamera.setOnClickListener {
             if(checkCameraPermission()){
                 openCamera()
@@ -39,23 +40,16 @@ class MainActivity : AppCompatActivity() {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 openCamera()
             } else {
-                Toast.makeText(this,"Aun requieres permiso",
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Aun requieres permiso", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun checkCameraPermission(): Boolean{
-        return ActivityCompat
-            .checkSelfPermission(this, Manifest.permission.CAMERA)==
-                PackageManager.PERMISSION_GRANTED
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)== PackageManager.PERMISSION_GRANTED
     }
     private fun requestPermissions() {
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.CAMERA,
-                Manifest.permission.ACCESS_FINE_LOCATION),
-            PERMISSION_ID
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION), PERMISSION_ID
         )
     }
 }
